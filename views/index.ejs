@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<!-- index.js 에서 선언 및 할당한 'data'를 ejs로 화면에 출력합니다 -->
+<h1>Hello, <%= data.name %></h1>
+</body>
+
+<!-- /upload라는 의미는, app.js에서 uploadRouter 변수로 정한 경로로 이동하는 것을 의미합니다 -->
+<form action="/upload" method="GET">
+    <input type="text" class="form-control" id="name" name="name"
+           value="<%= data.name %>" hidden>
+    <input type="text" class="form-control" id="param1" name="param1" value="<%= data.param1 %>"
+           hidden>
+    <input type="text" class="form-control" id="param2" name="param2" value="<%= data.param2 %>"
+           hidden>
+    <button class="w-100 btn btn-lg btn-primary" type="submit">입력하기</button>
+</form>
+<br><br>
+
+<!-- data 안에 담긴 변수들을 출력하여 변화한 값을 확인합니다. data.name만 변화하고, 다른 값들은 변하지 않을 것입니다. -->
+<% if (data !== undefined){ %>
+    data.name   : <%= data.name %><br>
+    data.param1 : <%= data.param1 %><br>
+    data.param2 : <%= data.param2 %><br><br><br>
+<% } %>
+</html>
