@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <!-- (c) ammap.com | SVG map of South Korea - High -->
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:amcharts="http://amcharts.com/ammap" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
+<svg id="svg" xmlns="http://www.w3.org/2000/svg" xmlns:amcharts="http://amcharts.com/ammap" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
 	<defs>
 		<style type="text/css">
 			.land
@@ -39,15 +39,284 @@
 		<path id="KR-50" title="Sejong" class="land" d="M180.84,395.146L182.397,397.326L182.086,400.128L179.906,400.751L182.709,404.176L182.709,406.979L183.159,408.328L186.491,408.523L186.398,409.979L185.573,411.799L186.651,412.939L184.789,419.024L185.367,418.243L185.766,417.918L186.472,418.063L187.087,418.922L187.396,418.957L187.068,422.235L186.134,425.039L182.709,426.596L181.798,426.639L179.283,427.218L179.596,435.937L177.416,438.428L175.713,436.376L173.965,435.031L172.754,431.937L172.888,427.902L172.619,425.077L171.274,421.176L168.583,419.697L166.7,417.141L166.566,415.123L167.642,412.702L167.642,409.608L167.507,406.11L167.239,402.747L167.911,400.326L167.642,397.231L167.104,395.215L166.028,393.197L166.431,391.447L169.122,390.371L171.677,391.178L173.157,392.793L175.848,394.407L178.403,395.348z"/>
 	</g>
 	<script>
- document.addEventListener("DOMContentLoaded", function() {
-            var KR11 = document.querySelector("#KR-11");
-            KR11.addEventListener("mouseover", function(event) {
+    <!-- document.addEventListener("DOMContentLoaded", function() {
+       var KR11 = document.querySelector("#KR-11");
+       console.log("test: "+KR11);
+        // var KR28_BUTTON = document.querySelector("#path");
+      
+       KR11.addEventListener("mouseover", function(event) {
+           if (event.target.tagName === "path") {
+               event.target.style.fill = "red"; // 호버 시 색상 변경
+               //KR28_BUTTON.stype.backgroundColor = "red"; 
+           }
+           
+       });
+
+       KR11.addEventListener("mouseout", function(event) {
+           if (event.target.tagName === "path") {
+               event.target.style.fill = ""; // 원래 색상으로 복원
+                //KR28_BUTTON.stype.backgroundColor = "beige"; 
+           }
+       });
+
+       
+   }); -->
+
+			 document.addEventListener("DOMContentLoaded", function() {
+            var KR26 = document.querySelector("#KR-26");
+            KR26.addEventListener("mouseover", function(event) {
                 if (event.target.tagName === "path") {
                     event.target.style.fill = "red"; // 호버 시 색상 변경
                 }
             });
 
-            KR11.addEventListener("mouseout", function(event) {
+            KR26.addEventListener("mouseout", function(event) {
+                if (event.target.tagName === "path") {
+                    event.target.style.fill = ""; // 원래 색상으로 복원
+                }
+            });
+
+			
+        });
+
+			 document.addEventListener("DOMContentLoaded", function() {
+            var KR27 = document.querySelector("#KR-27");
+            KR27.addEventListener("mouseover", function(event) {
+                if (event.target.tagName === "path") {
+                    event.target.style.fill = "red"; // 호버 시 색상 변경
+                }
+            });
+
+            KR27.addEventListener("mouseout", function(event) {
+                if (event.target.tagName === "path") {
+                    event.target.style.fill = ""; // 원래 색상으로 복원
+                }
+            });
+
+			
+        });
+
+			 document.addEventListener("DOMContentLoaded", function() {
+            var KR28 = document.querySelector("#KR-28");
+          
+            KR28.addEventListener("mouseover", function(event) {
+                if (event.target.tagName === "path") {
+                    event.target.style.fill = "red"; // 호버 시 색상 변경
+                }
+                KR28_BUTTON.style = "background-color: red;"
+                
+            });
+
+            KR28.addEventListener("mouseout", function(event) {
+                if (event.target.tagName === "path") {
+                    event.target.style.fill = ""; // 원래 색상으로 복원
+                }
+                 KR28_BUTTON.style = "background-color: beige;"
+            });
+
+			
+        });
+
+			 document.addEventListener("DOMContentLoaded", function() {
+            var KR29 = document.querySelector("#KR-29");
+            KR29.addEventListener("mouseover", function(event) {
+                if (event.target.tagName === "path") {
+                    event.target.style.fill = "red"; // 호버 시 색상 변경
+                }
+            });
+
+            KR29.addEventListener("mouseout", function(event) {
+                if (event.target.tagName === "path") {
+                    event.target.style.fill = ""; // 원래 색상으로 복원
+                }
+            });
+
+			
+        });
+
+			 document.addEventListener("DOMContentLoaded", function() {
+            var KR30 = document.querySelector("#KR-30");
+            KR30.addEventListener("mouseover", function(event) {
+                if (event.target.tagName === "path") {
+                    event.target.style.fill = "red"; // 호버 시 색상 변경
+                }
+            });
+
+            KR30.addEventListener("mouseout", function(event) {
+                if (event.target.tagName === "path") {
+                    event.target.style.fill = ""; // 원래 색상으로 복원
+                }
+            });
+
+			
+        });
+
+			 document.addEventListener("DOMContentLoaded", function() {
+            var KR31 = document.querySelector("#KR-31");
+            KR31.addEventListener("mouseover", function(event) {
+                if (event.target.tagName === "path") {
+                    event.target.style.fill = "red"; // 호버 시 색상 변경
+                }
+            });
+
+            KR31.addEventListener("mouseout", function(event) {
+                if (event.target.tagName === "path") {
+                    event.target.style.fill = ""; // 원래 색상으로 복원
+                }
+            });
+
+			
+        });
+
+			 document.addEventListener("DOMContentLoaded", function() {
+            var KR41 = document.querySelector("#KR-41");
+            KR41.addEventListener("mouseover", function(event) {
+                if (event.target.tagName === "path") {
+                    event.target.style.fill = "red"; // 호버 시 색상 변경
+                }
+            });
+
+            KR41.addEventListener("mouseout", function(event) {
+                if (event.target.tagName === "path") {
+                    event.target.style.fill = ""; // 원래 색상으로 복원
+                }
+            });
+
+			
+        });
+
+			 document.addEventListener("DOMContentLoaded", function() {
+            var KR42 = document.querySelector("#KR-42");
+            KR42.addEventListener("mouseover", function(event) {
+                if (event.target.tagName === "path") {
+                    event.target.style.fill = "red"; // 호버 시 색상 변경
+                }
+            });
+
+            KR42.addEventListener("mouseout", function(event) {
+                if (event.target.tagName === "path") {
+                    event.target.style.fill = ""; // 원래 색상으로 복원
+                }
+            });
+
+			
+        });
+
+			document.addEventListener("DOMContentLoaded", function() {
+            var KR43 = document.querySelector("#KR-43");
+            KR43.addEventListener("mouseover", function(event) {
+                if (event.target.tagName === "path") {
+                    event.target.style.fill = "red"; // 호버 시 색상 변경
+                }
+            });
+
+            KR43.addEventListener("mouseout", function(event) {
+                if (event.target.tagName === "path") {
+                    event.target.style.fill = ""; // 원래 색상으로 복원
+                }
+            });
+
+			});
+
+			 document.addEventListener("DOMContentLoaded", function() {
+            var KR44 = document.querySelector("#KR-44");
+            KR44.addEventListener("mouseover", function(event) {
+                if (event.target.tagName === "path") {
+                    event.target.style.fill = "red"; // 호버 시 색상 변경
+                }
+            });
+
+            KR44.addEventListener("mouseout", function(event) {
+                if (event.target.tagName === "path") {
+                    event.target.style.fill = ""; // 원래 색상으로 복원
+                }
+            });
+
+			});
+			 document.addEventListener("DOMContentLoaded", function() {
+            var KR45 = document.querySelector("#KR-45");
+            KR45.addEventListener("mouseover", function(event) {
+                if (event.target.tagName === "path") {
+                    event.target.style.fill = "red"; // 호버 시 색상 변경
+                }
+            });
+
+            KR45.addEventListener("mouseout", function(event) {
+                if (event.target.tagName === "path") {
+                    event.target.style.fill = ""; // 원래 색상으로 복원
+                }
+            });
+});
+			
+			 document.addEventListener("DOMContentLoaded", function() {
+            var KR46 = document.querySelector("#KR-46");
+            KR46.addEventListener("mouseover", function(event) {
+                if (event.target.tagName === "path") {
+                    event.target.style.fill = "red"; // 호버 시 색상 변경
+                }
+            });
+
+            KR46.addEventListener("mouseout", function(event) {
+                if (event.target.tagName === "path") {
+                    event.target.style.fill = ""; // 원래 색상으로 복원
+                }
+            });
+
+			});
+			 document.addEventListener("DOMContentLoaded", function() {
+            var KR47 = document.querySelector("#KR-47");
+            KR47.addEventListener("mouseover", function(event) {
+                if (event.target.tagName === "path") {
+                    event.target.style.fill = "red"; // 호버 시 색상 변경
+                }
+            });
+
+            KR47.addEventListener("mouseout", function(event) {
+                if (event.target.tagName === "path") {
+                    event.target.style.fill = ""; // 원래 색상으로 복원
+                }
+            });
+
+			});
+			 document.addEventListener("DOMContentLoaded", function() {
+            var KR48 = document.querySelector("#KR-48");
+            KR48.addEventListener("mouseover", function(event) {
+                if (event.target.tagName === "path") {
+                    event.target.style.fill = "red"; // 호버 시 색상 변경
+                }
+            });
+
+            KR48.addEventListener("mouseout", function(event) {
+                if (event.target.tagName === "path") {
+                    event.target.style.fill = ""; // 원래 색상으로 복원
+                }
+            });
+
+			});
+			 document.addEventListener("DOMContentLoaded", function() {
+            var KR49 = document.querySelector("#KR-49");
+            KR49.addEventListener("mouseover", function(event) {
+                if (event.target.tagName === "path") {
+                    event.target.style.fill = "red"; // 호버 시 색상 변경
+                }
+            });
+
+            KR49.addEventListener("mouseout", function(event) {
+                if (event.target.tagName === "path") {
+                    event.target.style.fill = ""; // 원래 색상으로 복원
+                }
+            });
+
+			});
+			 document.addEventListener("DOMContentLoaded", function() {
+            var KR50 = document.querySelector("#KR-50");
+            KR50.addEventListener("mouseover", function(event) {
+                if (event.target.tagName === "path") {
+                    event.target.style.fill = "red"; // 호버 시 색상 변경
+                }
+            });
+
+            KR50.addEventListener("mouseout", function(event) {
                 if (event.target.tagName === "path") {
                     event.target.style.fill = ""; // 원래 색상으로 복원
                 }

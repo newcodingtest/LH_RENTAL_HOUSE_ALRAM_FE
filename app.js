@@ -20,6 +20,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static('static'));
 
 let indexRouter = require("./routes/index");
+
 router.get('/img/southKoreaHigh.svg', function(req, res){
     var imgName = req.params.imageName;
     console.log('이미지 요청: ' + imgName);
