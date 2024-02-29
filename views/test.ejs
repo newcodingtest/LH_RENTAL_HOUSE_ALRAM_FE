@@ -1,0 +1,129 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Bootstrap icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" type="text/css" />
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="css/styles.css" rel="stylesheet" />
+    <title>Document</title>
+</head>
+<body>
+    <body>
+        <!-- Navigation-->
+        <nav class="navbar navbar-light bg-light static-top">
+            <div class="container">
+                <a class="navbar-brand" href="#!">LH청약알리미</a>
+                <a class="btn btn-primary" href="#signup">Sign Up</a>
+            </div>
+        </nav>
+        <!-- Masthead-->
+        <header class="masthead">
+            <div class="container position-relative">
+                <div class="row justify-content-center">
+                    <div class="col-xl-6">
+                        <div class="text-center text-white">
+                            <!-- Page heading-->
+                            <h1 class="mb-5">검색창</h1>
+                            <!-- Signup form-->
+                            <!-- to get an API token!-->
+                            <form class="form-subscribe" id="contactForm" data-sb-form-api-token="API_TOKEN">
+                                <!-- Email address input-->
+                                <div class="row">
+                                    <div class="col">
+                                        <input class="form-control form-control-lg" id="emailAddress" type="email" placeholder="도시검색" data-sb-validations="required,email" />
+                                        <div class="invalid-feedback text-white" data-sb-feedback="emailAddress:required">Email Address is required.</div>
+                                        <div class="invalid-feedback text-white" data-sb-feedback="emailAddress:email">Email Address Email is not valid.</div>
+                                    </div>
+                                    <div class="col-auto"><button class="btn btn-primary btn-lg disabled" id="submitButton" type="submit">검색</button></div>
+                                </div>
+                                <!-- Submit success message-->
+                                <!---->
+                                <!-- This is what your users will see when the form-->
+                                <!-- has successfully submitted-->
+                                <div class="d-none" id="submitSuccessMessage">
+                                    <div class="text-center mb-3">
+                                        <div class="fw-bolder">Form submission successful!</div>
+                                        <p>To activate this form, sign up at</p>
+                                        <a class="text-white" href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
+                                    </div>
+                                </div>
+                                <!-- Submit error message-->
+                                <!---->
+                                <!-- This is what your users will see when there is-->
+                                <!-- an error submitting the form-->
+                                <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
+                            </form>
+
+                            <div class="row">
+                                <div class="col-auto "><button class="btn btn-secondary" id="submitButton" type="submit">서울(10)</button></div>
+                                <div class="col-auto"><button class="btn btn-secondary" id="submitButton" type="submit">대전(5)</button></div>
+                                <div class="col-auto"><button class="btn btn-secondary" id="submitButton" type="submit">대구(2)</button></div>
+                                <div class="col-auto"><button class="btn btn-secondary" id="submitButton" type="submit">부산(5)</button></div>
+                                <div class="col-auto"><button class="btn btn-secondary" id="submitButton" type="submit">광주(3)</button></div>
+                                <div class="col-auto"><button class="btn btn-secondary" id="submitButton" type="submit">제주(1)</button></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+   
+
+        <!-- Icons Grid-->
+        <section class="features-icons bg-light text-center">
+            <div class="table-responsive">
+                <!-- 페이지 LIST-->
+                <table class="table table-striped table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">First</th>
+                        <th scope="col">Last</th>
+                        <th scope="col">Handle</th>
+                      </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">3</th>
+                        <th scope="row">3</th>
+                        <th scope="row">3</th>
+                        <th scope="row">3</th>
+                      </tr>
+                </tbody>
+              </table>
+              </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+                            <div ><object style="text-align: center;" id="koreasvg" type="image/svg+xml" src="img/southKoreaHigh.svg"  data="img/southKoreaHigh.svg" width="3000" height="2000"></object></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+<!-- params: func, time-->    
+setInterval(lhApiCallService,10*1000);
+
+const LhApiUrl = `http://localhost:8081/public/house/v1?cityName=${encodeURIComponent("광주")}&kindOfHouseName=${encodeURIComponent("임대주택")}`
+
+function lhApiCallService(){
+    axios.get(LhApiUrl)
+		.then(res => res.data)
+        .then(data => console.log(data));
+
+}
+</script>
+
+</html>

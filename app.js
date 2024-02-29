@@ -4,6 +4,7 @@ const router = express.Router();
 let cookieParser = require('cookie-parser'); // 쿠키값을 다루기 위해 필요한 모듈
 let path = require('path'); // 프로젝트 내부에서, 파일들의 상대경로를  위한 모듈
 const fs = require('fs');
+const axios = require("axios");
 
 // 여기서 만든 app객체로 모든 요청·응답을 진행함
 const app = express();
