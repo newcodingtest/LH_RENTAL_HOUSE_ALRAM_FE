@@ -1,0 +1,248 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Bootstrap icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" type="text/css" />
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="css/styles.css" rel="stylesheet" />
+    <title>Document</title>
+</head>
+<body>
+    <body>
+        <!-- Navigation-->
+        <nav class="navbar navbar-light bg-light static-top">
+            <div class="container">
+                <a class="navbar-brand" href="#!">LH청약알리미</a>
+                <a class="btn btn-primary" href="#signup">Sign Up</a>
+            </div>
+        </nav>
+        <!-- Masthead-->
+        <header class="masthead">
+            <div class="container position-relative">
+                <div class="row justify-content-center">
+                    <div class="col-xl-6">
+                        <div class="text-center text-white">
+                            <!-- Page heading-->
+                            <h1 class="mb-5">검색창</h1>
+                            <!-- Signup form-->
+                            <!-- to get an API token!-->
+                            <form class="form-subscribe" id="contactForm" data-sb-form-api-token="API_TOKEN">
+                                <!-- Email address input-->
+                                <div class="row">
+                                    <div class="col">
+                                        <input class="form-control form-control-lg" id="searchText"  placeholder="도시검색" type="text" />
+                                    </div>
+                                    <div class="col-auto">
+                                        <button class="btn btn-primary btn-lg" id="submitButton" type="submit" onClick="search(this)">검색</button>
+                                    </div>
+                                </div>
+                                <!-- Submit success message-->
+                                <!---->
+                                <!-- This is what your users will see when the form-->
+                                <!-- has successfully submitted-->
+                                <div class="d-none" id="submitSuccessMessage">
+                                    <div class="text-center mb-3">
+                                        <div class="fw-bolder">Form submission successful!</div>
+                                        <p>To activate this form, sign up at</p>
+                                        <a class="text-white" href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
+                                    </div>
+                                </div>
+                                <!-- Submit error message-->
+                                <!---->
+                                <!-- This is what your users will see when there is-->
+                                <!-- an error submitting the form-->
+                                <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
+                            </form>
+
+                            <div class="row">
+                                <div class="col-auto "><button class="btn btn-secondary" id="seoulCnt" type="submit">서울(10)</button></div>
+                                <div class="col-auto "><button class="btn btn-secondary" id="gyungiCnt" type="submit">경기도(10)</button></div>
+                                <div class="col-auto"><button class="btn btn-secondary" id="daejeonCnt" type="submit">대전(5)</button></div>
+                                <div class="col-auto"><button class="btn btn-secondary" id="daeguCnt" type="submit">대구(2)</button></div>
+                                <div class="col-auto"><button class="btn btn-secondary" id="busanCnt" type="submit">부산(5)</button></div>
+                                <div class="col-auto"><button class="btn btn-secondary" id="gwangjuCnt" type="submit">광주(3)</button></div>
+                                <div class="col-auto"><button class="btn btn-secondary" id="jejuCnt" type="submit">제주도(1)</button></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+   
+
+        <!-- Icons Grid-->
+        <section class="features-icons bg-light text-center">
+            <div class="table-responsive">
+                <!-- 페이지 LIST-->
+                <table class="table table-striped table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col">번호</th>
+                        <th scope="col">도시</th>
+                        <th scope="col">공고문</th>
+                        <th scope="col">날짜</th>
+                      </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">3</th>
+                        <th scope="row">3</th>
+                        <th scope="row">3</th>
+                        <th scope="row">3</th>
+                      </tr>
+                </tbody>
+              </table>
+              </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+                            <div ><object style="text-align: center;" id="koreasvg" type="image/svg+xml" src="img/southKoreaHigh.svg"  data="img/southKoreaHigh.svg" width="3000" height="2000"></object></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+<!-- params: func, time-->    
+//setInterval(lhApiCallService,10*1000);
+
+const gwangju_url = `http://localhost:8081/public/house/v1?cityName=${encodeURIComponent("광주")}&kindOfHouseName=${encodeURIComponent("임대주택")}`
+const gyungido_url = `http://localhost:8081/public/house/v1?cityName=${encodeURIComponent("경기도")}&kindOfHouseName=${encodeURIComponent("임대주택")}`
+const seoul_url = `http://localhost:8081/public/house/v1?cityName=${encodeURIComponent("서울")}&kindOfHouseName=${encodeURIComponent("임대주택")}`
+const daejeon_url = `http://localhost:8081/public/house/v1?cityName=${encodeURIComponent("대전")}&kindOfHouseName=${encodeURIComponent("임대주택")}`
+const daegu_url = `http://localhost:8081/public/house/v1?cityName=${encodeURIComponent("대구")}&kindOfHouseName=${encodeURIComponent("임대주택")}`
+const busan_url = `http://localhost:8081/public/house/v1?cityName=${encodeURIComponent("부산")}&kindOfHouseName=${encodeURIComponent("임대주택")}`
+const jeju_url = `http://localhost:8081/public/house/v1?cityName=${encodeURIComponent("제주도")}&kindOfHouseName=${encodeURIComponent("임대주택")}`
+
+
+/**
+ * 
+    {
+        "cityName": "2906",
+        "content": "[{\"startDT\":\"2024.02.16\",\"majorCategiry\":\"영구임대\",\"city\":\"광주광역시\",\"noticeStartDT\":\"20240216\",\"noticeUrl\":\"https://apply.lh.or.kr/lhapply/apply/wt/wrtanc/selectWrtancInfo.do?panId\\u003d2015122300015343\\u0026ccrCnntSysDsCd\\u003d03\\u0026uppAisTpCd\\u003d06\\u0026aisTpCd\\u003d09\\u0026mi\\u003d1026\",\"title\":\"광주효천2 1단지(A-2BL) 영구임대주택 예비입주자 모집\",\"subCategiry\":\"임대주택\"}, {\"startDT\":\"2024.02.15\",\"majorCategiry\":\"영구임대\",\"city\":\"광주광역시\",\"noticeStartDT\":\"20240215\",\"noticeUrl\":\"https://apply.lh.or.kr/lhapply/apply/wt/wrtanc/selectWrtancInfo.do?panId\\u003d2015122300015338\\u0026ccrCnntSysDsCd\\u003d03\\u0026uppAisTpCd\\u003d06\\u0026aisTpCd\\u003d09\\u0026mi\\u003d1026\",\"title\":\"광주선운2 A-2블록 영구임대주택 입주자 추가 모집\",\"subCategiry\":\"임대주택\"}]",
+        "cnt": 2,
+        "city": "광주"
+    }
+ * 
+*/
+
+let gwangju_axios = axios.get(gwangju_url, 5000)
+                            .then(response => {
+                                console.log(response.data.cnt)
+                                var seoulBtn = document.querySelector('#gwangjuCnt')
+                                console.log(response.data);
+                                seoulBtn.innerHTML = `광주(${response.data.cnt})`
+                            })
+                            .catch(function(error){
+                                console.error("광주 Api Server not working");   
+                            }); 
+
+let seoul_axios = axios.get(seoul_url, 5000)
+                        .then(response => {
+                            console.log(response.data.cnt)
+                            var seoulBtn = document.querySelector('#seoulCnt')
+                            console.log(response.data);
+                            seoulBtn.innerHTML = `서울(${response.data.cnt})`
+                        })
+                        .catch(function(error){
+                            console.error("서울 Api Server not working");   
+                        });
+
+let gyungido_axios = axios.get(gyungido_url, 5000)
+                            .then(response => {
+                                console.log(response.data.cnt)
+                                var seoulBtn = document.querySelector('#gyungiCnt')
+                                console.log(response.data);
+                                seoulBtn.innerHTML = `경기도(${response.data.cnt})`
+                            })
+                            .catch(function(error){
+                                console.error("경기도 Api Server not working");   
+                            }); 
+                 
+let daejeon_axios = axios.get(daejeon_url)
+                        .then(response => {
+                            console.log(response.data.cnt)
+                            var seoulBtn = document.querySelector('#daejeonCnt')
+                            seoulBtn.innerHTML = `대전(${response.data.cnt})`
+                        })
+                        .catch(function(error){
+                            console.error("대전 Api Server not working");   
+                        });          
+let daegu_axios = axios.get(daegu_url)
+                        .then(response => {
+                            console.log(response.data.cnt)
+                            var seoulBtn = document.querySelector('#daeguCnt')
+                            seoulBtn.innerHTML = `대구(${response.data.cnt})`
+                        })
+                        .catch(function(error){
+                            console.error("대구 Api Server not working");   
+                        });
+let busan_axios = axios.get(busan_url)
+                        .then(response => {
+                            console.log(response.data.cnt)
+                            var seoulBtn = document.querySelector('#busanCnt')
+                            seoulBtn.innerHTML = `부산(${response.data.cnt})`
+                        })
+                        .catch(function(error){
+                            console.error("부산 Api Server not working");   
+                        });
+let jeju_axios = axios.get(jeju_url)
+                        .then(response => {
+                            console.log(response.data.cnt)
+                            var seoulBtn = document.querySelector('#jejuCnt')
+                            seoulBtn.innerHTML = `제주도(${response.data.cnt})`
+                        })
+                        .catch(function(error){
+                            console.error("제주도 Api Server not working");   
+                        });
+
+                        
+//seoulBtn.innerText = 
+
+function search(button){
+    console.log("검색");
+    var searchText = document.querySelector('#searchText');
+    if(!isEmpty(searchText)){
+        console.log("검색 내용: ", searchText.value);
+        console.log("서버로 보내~")
+    } else{
+        console.log("빈값이야~");
+    }
+}
+
+function isEmpty(text){
+  if(text && text.value.trim() != ''){
+    return false;
+  }
+  return true;
+}
+
+//todo: 도시별 공고 개수 api 
+function getNoticeCntByCity(){
+    var seoulCnt = 1;
+    var daejeonCnt = 2;
+    var daeguCnt = 3;
+    var busanCnt = 4;
+    var gwangjuCnt = 5;
+    var jejuCnt = 6;
+    document.querySelector('#seoulCnt').innerHTML = `서울(${seoulCnt})`;
+    document.querySelector('#daejeonCnt').innerHTML = `대전(${daejeonCnt})`;
+    document.querySelector('#daeguCnt').innerHTML = `대구(${daeguCnt})`;
+    document.querySelector('#busanCnt').innerHTML = `부산(${busanCnt})`;
+    document.querySelector('#gwangjuCnt').innerHTML = `광주(${gwangjuCnt})`;
+    document.querySelector('#jejuCnt').innerHTML = `제주도(${jejuCnt})`;
+}
+</script>
+
+</html>
