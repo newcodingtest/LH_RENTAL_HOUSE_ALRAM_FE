@@ -1,0 +1,42 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button type="button" value="test" style="background-color: beige;" id="path">test</button>
+    <object id="koreasvg" type="image/svg+xml" src="img/southKoreaHigh.svg"  data="img/southKoreaHigh.svg" width="3000" height="2000">
+      
+</body>
+<script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var a = document.getElementById("koreasvg");
+            var svgDoc = a.contentDocument ;
+
+            var seoul = svgDoc.getElementById("KR-11");
+            var custom_button = document.getElementById("path");   
+
+            seoul.addEventListener("mouseover", function(event) {
+            if (event.target.tagName === "path") {
+                event.target.style.fill = "red"; // 호버 시 색상 변경
+                document.getElementById("path").style.backgroundColor = "rgba(255,0,0,0.8)";
+            }
+            
+            });
+
+            seoul.addEventListener("mouseout", function(event) {
+                if (event.target.tagName === "path") {
+                    event.target.style.fill = ""; // 원래 색상으로 복원
+                        custom_button.style.backgroundColor = "beige"; 
+                }
+            });
+        });
+
+</script>
+
+</html>
