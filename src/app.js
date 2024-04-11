@@ -1,3 +1,10 @@
+// 외부 env 파일 사용
+require('dotenv').config({path:'../.env'});
+console.log("DB_HOST:", process.env.SERVER_HOST);
+console.log("DB_USER:", process.env.SERVER_PORT);
+console.log("DB_PASS:", process.env.API_HOST);
+console.log("DB_PASS:", process.env.API_PORT);
+
 const http = require('http');
 const express = require('express');
 const router = express.Router();
@@ -8,6 +15,7 @@ const axios = require("axios");
 const await = require("await");
 // 여기서 만든 app객체로 모든 요청·응답을 진행함
 const app = express();
+
 
 // 뷰 엔진으로 뭘 쓸지 정함. 우리는 ejs 사용.
 app.set('views', path.join(__dirname, 'views'));
@@ -33,8 +41,8 @@ app.use('/', indexRouter);
 // app객체를 실행할 server객체를 만듦
 const server = http.createServer(app);
 
-const hostname = 'localhost';
-const port = 3000;
+const hostname = process.env.SERVER_HOST;
+const port = process.env.SERVER_PORT;
 // hostname, port에 대해 server객체가 listen하기 시작함.
 server.listen(port, hostname, () => {
     console.log(`Server running at http://${hostname}:${port}`);

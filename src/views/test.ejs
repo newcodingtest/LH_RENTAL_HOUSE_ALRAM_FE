@@ -116,8 +116,8 @@
 <script>
 <!-- params: func, time-->    
 //setInterval(lhApiCallService,10*1000);
-const host = '192.168.0.190';
-const port = '8081';
+const host = process.env.API_HOST;
+const port = process.env.API_PORT;
 const gwangju_url = `http://${host}:${port}/public/house/v1?cityName=${encodeURIComponent("광주")}&kindOfHouseName=${encodeURIComponent("임대주택")}`
 const gyungido_url = `http://${host}:${port}/public/house/v1?cityName=${encodeURIComponent("경기도")}&kindOfHouseName=${encodeURIComponent("임대주택")}`
 const seoul_url = `http://${host}:${port}/public/house/v1?cityName=${encodeURIComponent("서울")}&kindOfHouseName=${encodeURIComponent("임대주택")}`
