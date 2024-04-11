@@ -187,6 +187,7 @@ let daegu_axios = axios.get(daegu_url)
                             seoulBtn.innerHTML = `대구(${response.data.cnt})`
                         })
                         .catch(function(error){
+                            
                             console.error("대구 Api Server not working");   
                         });
 let busan_axios = axios.get(busan_url)
@@ -222,6 +223,8 @@ function search(button){
                 createTableRow(response.data);
              })
              .catch(function(error){
+                            console.log();
+                            alert(error.response.data.reason);
                             console.error("Api Server not working");   
                         });
     } else{
