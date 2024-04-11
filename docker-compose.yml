@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+   LH_RENTAL_HOUSE_ALRAM_FE:
+     container_name: LH_RENTAL_HOUSE_ALRAM_FE
+     network_mode: "host"
+     image: node:16
+     restart: always
+     working_dir: /app
+     logging:
+       driver: 'json-file'
+       options:
+        max-size: '10m'
+        max-file: '10'
+     volumes:
+       - "/hdd/apps/test/nodejs/LH_RENTAL_HOUSE_ALRAM_FE/:/app/"
+     command: bash -c "npm install package.json && cd src && node app.js"
