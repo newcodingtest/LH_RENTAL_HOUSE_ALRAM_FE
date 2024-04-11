@@ -41,7 +41,7 @@
                                         <input class="form-control form-control-lg" id="searchText"  placeholder="지역검색" type="text" />
                                     </div>
                                     <div class="col-auto">
-                                        <input class="btn btn-primary btn-lg" id="submitButton" type="button" onClick="search(this)" value="검색">
+                                        <input class="btn btn-primary btn-lg" id="submitButton" type="button" onClick="searchAPI()" value="검색">
                                     </div>
                                 </div>
                                 <!-- Submit success message-->
@@ -63,13 +63,13 @@
                             </form>
 
                             <div class="row">
-                                <div class="col-auto "><input class="btn btn-secondary" id="seoulCnt" type="submit" value="서울"></div>
-                                <div class="col-auto "><input class="btn btn-secondary" id="gyungiCnt" type="submit" value="경기도"></div>
-                                <div class="col-auto"><input class="btn btn-secondary" id="daejeonCnt" type="submit" value="대전"></div>
-                                <div class="col-auto"><input class="btn btn-secondary" id="daeguCnt" type="submit" value="대구"></div>
-                                <div class="col-auto"><input class="btn btn-secondary" id="busanCnt" type="submit" value="부산"></div>
-                                <div class="col-auto"><input class="btn btn-secondary" id="gwangjuCnt" type="submit" value="광주"></div>
-                                <div class="col-auto"><input class="btn btn-secondary" id="jejuCnt" type="submit" value="제주도"></div>
+                                <div class="col-auto "><input class="btn btn-secondary" id="seoulCnt" type="submit" value="서울(0)" onClick="clickCityButton('서울')"></div>
+                                <div class="col-auto "><input class="btn btn-secondary" id="gyungiCnt" type="submit" value="경기도(0)" onClick="clickCityButton('경기도')"></div>
+                                <div class="col-auto"><input class="btn btn-secondary" id="daejeonCnt" type="submit" value="대전(0)" onClick="clickCityButton('대전')"></div>
+                                <div class="col-auto"><input class="btn btn-secondary" id="daeguCnt" type="submit" value="대구(0)" onClick="clickCityButton('대구')"></div>
+                                <div class="col-auto"><input class="btn btn-secondary" id="busanCnt" type="submit" value="부산(0)" onClick="clickCityButton('부산')"></div>
+                                <div class="col-auto"><input class="btn btn-secondary" id="gwangjuCnt" type="submit" value="광주(0)" onClick="clickCityButton('광주')"></div>
+                                <div class="col-auto"><input class="btn btn-secondary" id="jejuCnt" type="submit" value="제주도(0)" onClick="clickCityButton('제주도')"></div>
                             </div>
                         </div>
                     </div>
@@ -121,13 +121,13 @@
 const API_HOST = document.getElementById("apihost").value;
 const API_PORT = document.getElementById("apiport").value;
 
-const gwangju_url = `http://${host}:${port}/public/house/v1?cityName=${encodeURIComponent("광주")}&kindOfHouseName=${encodeURIComponent("임대주택")}`
-const gyungido_url = `http://${host}:${port}/public/house/v1?cityName=${encodeURIComponent("경기도")}&kindOfHouseName=${encodeURIComponent("임대주택")}`
-const seoul_url = `http://${host}:${port}/public/house/v1?cityName=${encodeURIComponent("서울")}&kindOfHouseName=${encodeURIComponent("임대주택")}`
-const daejeon_url = `http://${host}:${port}/public/house/v1?cityName=${encodeURIComponent("대전")}&kindOfHouseName=${encodeURIComponent("임대주택")}`
-const daegu_url = `http://${host}:${port}/public/house/v1?cityName=${encodeURIComponent("대구")}&kindOfHouseName=${encodeURIComponent("임대주택")}`
-const busan_url = `http://${host}:${port}/public/house/v1?cityName=${encodeURIComponent("부산")}&kindOfHouseName=${encodeURIComponent("임대주택")}`
-const jeju_url = `http://${host}:${port}/public/house/v1?cityName=${encodeURIComponent("제주도")}&kindOfHouseName=${encodeURIComponent("임대주택")}`
+const gwangju_url = `http://${API_HOST}:${API_PORT}/public/house/v1?cityName=${encodeURIComponent("광주")}&kindOfHouseName=${encodeURIComponent("임대주택")}`
+const gyungido_url = `http://${API_HOST}:${API_PORT}/public/house/v1?cityName=${encodeURIComponent("경기도")}&kindOfHouseName=${encodeURIComponent("임대주택")}`
+const seoul_url = `http://${API_HOST}:${API_PORT}/public/house/v1?cityName=${encodeURIComponent("서울")}&kindOfHouseName=${encodeURIComponent("임대주택")}`
+const daejeon_url = `http://${API_HOST}:${API_PORT}/public/house/v1?cityName=${encodeURIComponent("대전")}&kindOfHouseName=${encodeURIComponent("임대주택")}`
+const daegu_url = `http://${API_HOST}:${API_PORT}/public/house/v1?cityName=${encodeURIComponent("대구")}&kindOfHouseName=${encodeURIComponent("임대주택")}`
+const busan_url = `http://${API_HOST}:${API_PORT}/public/house/v1?cityName=${encodeURIComponent("부산")}&kindOfHouseName=${encodeURIComponent("임대주택")}`
+const jeju_url = `http://${API_HOST}:${API_PORT}/public/house/v1?cityName=${encodeURIComponent("제주도")}&kindOfHouseName=${encodeURIComponent("임대주택")}`
 
 
 /**
@@ -140,90 +140,61 @@ const jeju_url = `http://${host}:${port}/public/house/v1?cityName=${encodeURICom
     }
  * 
 */
+//도시별 공고문 개수 보여주는 API
+function showCntNoticeByCity(url, html_id){
+    axios.get(url, 5000)
+                    .then(response => {
+                          
+                          //API로 가져온 도시별 공고문 개수
+                          let noticeCntByCity = response.data.cnt
+                          let notice = response.data;
+                          console.log(notice)
+                          let cntId = document.querySelector(`#${html_id}`)
+                          let str =  cntId.value
+                          let cityName = str.substring(0,str.indexOf('('));
+                          //localStorage.setItem(cityName, JSON.stringify(response.data));
+                          localStorage.setItem(cityName, JSON.stringify(notice));
 
-let gwangju_axios = axios.get(gwangju_url, 5000)
-                            .then(response => {
-                                console.log(response.data.cnt)
-                                var seoulBtn = document.querySelector('#gwangjuCnt')
-                                console.log(response.data);
-                                seoulBtn.innerHTML = `광주(${response.data.cnt})`
-                            })
-                            .catch(function(error){
-                                console.error("광주 Api Server not working");   
-                            }); 
+                          cntId.value =  `${cityName}(${noticeCntByCity})`
+                      })
+                      .catch(function(error){
+                          if (error.response) {
+                              // 요청이 전송되었고, 서버는 2xx 외의 상태 코드로 응답했습니다.
+                              console.log(error.response.data);
+                              console.log(error.response.status);
+                              console.log(error.response.headers);
+                          } else if (error.request) {
+                              // 요청이 전송되었지만, 응답이 수신되지 않았습니다. 
+                              // 'error.request'는 브라우저에서 XMLHtpRequest 인스턴스이고,
+                              // node.js에서는 http.ClientRequest 인스턴스입니다.
+                              console.log(error.request);
+                          } else {
+                              // 오류가 발생한 요청을 설정하는 동안 문제가 발생했습니다.
+                              console.log('Error', error.message);
+                          }
+                      }); 
+}
 
-let seoul_axios = axios.get(seoul_url, 5000)
-                        .then(response => {
-                            console.log(response.data.cnt)
-                            var seoulBtn = document.querySelector('#seoulCnt')
-                            console.log(response.data);
-                            seoulBtn.innerHTML = `서울(${response.data.cnt})`
-                        })
-                        .catch(function(error){
-                            console.error("서울 Api Server not working");   
-                        });
-
-let gyungido_axios = axios.get(gyungido_url, 5000)
-                            .then(response => {
-                                console.log(response.data.cnt)
-                                var seoulBtn = document.querySelector('#gyungiCnt')
-                                console.log(response.data);
-                                seoulBtn.innerHTML = `경기도(${response.data.cnt})`
-                            })
-                            .catch(function(error){
-                                console.error("경기도 Api Server not working");   
-                            }); 
+showCntNoticeByCity(gwangju_url,'gwangjuCnt');
+showCntNoticeByCity(seoul_url,'seoulCnt');
+showCntNoticeByCity(gyungido_url,'gyungiCnt');
+showCntNoticeByCity(daejeon_url,'daejeonCnt');
+showCntNoticeByCity(daegu_url,'daeguCnt');
+showCntNoticeByCity(busan_url,'busanCnt');
+showCntNoticeByCity(jeju_url,'jejuCnt');
                  
-let daejeon_axios = axios.get(daejeon_url)
-                        .then(response => {
-                            console.log(response.data.cnt)
-                            var seoulBtn = document.querySelector('#daejeonCnt')
-                            seoulBtn.innerHTML = `대전(${response.data.cnt})`
-                        })
-                        .catch(function(error){
-                            console.error("대전 Api Server not working");   
-                        });          
-let daegu_axios = axios.get(daegu_url)
-                        .then(response => {
-                            console.log(response.data.cnt)
-                            var seoulBtn = document.querySelector('#daeguCnt')
-                            seoulBtn.innerHTML = `대구(${response.data.cnt})`
-                        })
-                        .catch(function(error){
-                            
-                            console.error("대구 Api Server not working");   
-                        });
-let busan_axios = axios.get(busan_url)
-                        .then(response => {
-                            console.log(response.data.cnt)
-                            var seoulBtn = document.querySelector('#busanCnt')
-                            seoulBtn.innerHTML = `부산(${response.data.cnt})`
-                        })
-                        .catch(function(error){
-                            console.error("부산 Api Server not working");   
-                        });
-let jeju_axios = axios.get(jeju_url)
-                        .then(response => {
-                            console.log(response.data.cnt)
-                            var seoulBtn = document.querySelector('#jejuCnt')
-                            seoulBtn.innerHTML = `제주도(${response.data.cnt})`
-                        })
-                        .catch(function(error){
-                            console.error("제주도 Api Server not working");   
-                        });
-
-                        
-//검색 api
-function search(button){
-    var searchText = document.querySelector('#searchText');
+//검색 API
+function searchAPI(){
+    let searchText = document.querySelector('#searchText');
     
     if(!isEmpty(searchText)){
         const params = { search: `${searchText.value}`}
         axios.get("http://"+API_HOST+":"+API_PORT+"/public/house/search", {params})
              .then(response => {
-                console.log(response.data)
+                let notice = response.data;
+                console.log(notice)
 
-                createTableRow(response.data);
+                createTableRow(notice);
              })
              .catch(function(error){
                             console.log();
@@ -235,6 +206,22 @@ function search(button){
     }
 }
 
+function clickCityButton(cityName){
+    console.log(cityName);
+    let notice = localStorage.getItem(cityName);
+    let noticeCnt =  JSON.parse(notice).cnt;
+ 
+    if(noticeCnt == 0){
+        announceNoNotice();
+    }else{
+        createTableRow(JSON.parse(notice));
+    }
+}
+
+function announceNoNotice(){
+    alert("공고중인 내용이 없습니다.");
+}
+
 function isEmpty(text){
   if(text && text.value.trim() != ''){
     return false;
@@ -244,12 +231,12 @@ function isEmpty(text){
 
 //todo: 도시별 공고 개수 api 
 function getNoticeCntByCity(){
-    var seoulCnt = 1;
-    var daejeonCnt = 2;
-    var daeguCnt = 3;
-    var busanCnt = 4;
-    var gwangjuCnt = 5;
-    var jejuCnt = 6;
+    let seoulCnt = 1;
+    let daejeonCnt = 2;
+    let daeguCnt = 3;
+    let busanCnt = 4;
+    let gwangjuCnt = 5;
+    let jejuCnt = 6;
     document.querySelector('#seoulCnt').innerHTML = `서울(${seoulCnt})`;
     document.querySelector('#daejeonCnt').innerHTML = `대전(${daejeonCnt})`;
     document.querySelector('#daeguCnt').innerHTML = `대구(${daeguCnt})`;
@@ -264,8 +251,11 @@ function getNoticeCntByCity(){
 //     <td scope="row">3</td>
 //     <td scope="row">3</td>
 // </tr>
+
+//테이블 정보 추가
 function createTableRow(data){
-    var target = JSON.parse(data.content);
+    console.log(typeof data);
+    let target = JSON.parse(data.content);
     //1. 테이블 row clear
     console.log(target);
     console.log(target.length);
@@ -273,16 +263,14 @@ function createTableRow(data){
     clearTableRows();
 
     //2. 새로운 row 추가
-    var tbody = document.querySelector("#noticeContent");
-    
-   
-    
-    for(var i = 0; i<target.length; i++){
-        var tr = document.createElement("tr");
+    let tbody = document.querySelector("#noticeContent");
+        
+    for(let i = 0; i<target.length; i++){
+        let tr = document.createElement("tr");
         //2-1.유형
-        var link = document.createElement("a")
+        let link = document.createElement("a")
         link.href = target[i].noticeUrl;
-        var td = document.createElement("td");
+        let td = document.createElement("td");
         td.textContent = target[i].majorCategiry;
         tr.appendChild(td);
 
@@ -306,13 +294,11 @@ function createTableRow(data){
         });
         tbody.appendChild(tr);
     }
-
-    console.log(tr);
-
 }
 
+//이전 테이블 정보 삭제
 function clearTableRows(){
-    var tbody = document.querySelector("#noticeContent");
+    let tbody = document.querySelector("#noticeContent");
     
     while(tbody.firstChild){
         tbody.removeChild(tbody.firstChild);
