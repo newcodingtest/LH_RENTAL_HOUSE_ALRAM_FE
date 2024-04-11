@@ -1,9 +1,12 @@
 // 외부 env 파일 사용
 require('dotenv').config({path:'../.env'});
-console.log("DB_HOST:", process.env.SERVER_HOST);
-console.log("DB_USER:", process.env.SERVER_PORT);
-console.log("DB_PASS:", process.env.API_HOST);
-console.log("DB_PASS:", process.env.API_PORT);
+console.log("SERVER_HOST:", process.env.SERVER_HOST);
+console.log("SERVER_PORT:", process.env.SERVER_PORT);
+
+const API_HOST = process.env.API_HOST;
+const API_PORT = process.env.API_PORT
+console.log("API_SERVER:", API_HOST);
+console.log("API_PORT:", API_PORT);
 
 const http = require('http');
 const express = require('express');
@@ -29,6 +32,16 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static('static'));
 
 let indexRouter = require("./routes/index");
+
+
+app.locals.getApiHost = function(value) {
+  return API_SERVER;
+};
+
+app.locals.getApiPort = function(value) {
+  return API_PORT; 
+};
+
 
 router.get('/img/southKoreaHigh.svg', function(req, res){
     var imgName = req.params.imageName;
