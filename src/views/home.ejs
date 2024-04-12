@@ -129,6 +129,18 @@ const daegu_url = `http://${API_HOST}:${API_PORT}/public/house/v1?cityName=${enc
 const busan_url = `http://${API_HOST}:${API_PORT}/public/house/v1?cityName=${encodeURIComponent("부산")}&kindOfHouseName=${encodeURIComponent("임대주택")}`
 const jeju_url = `http://${API_HOST}:${API_PORT}/public/house/v1?cityName=${encodeURIComponent("제주도")}&kindOfHouseName=${encodeURIComponent("임대주택")}`
 
+//svg 클릭 이벤트
+function svgClickEventHandler(svgId,cityName){
+    var svg = document.querySelector("#koreasvg");
+
+    svg.addEventListener('load', function(){
+        const svgDocument = svg.contentDocument;
+        const krclick = svgDocument.getElementById(svgId);
+        krclick.addEventListener("click", function(){
+            clickCityButton(cityName);
+        });
+    });
+}
 
 /**
  * 
@@ -176,12 +188,26 @@ function showCntNoticeByCity(url, html_id){
 }
 
 showCntNoticeByCity(gwangju_url,'gwangjuCnt');
+svgClickEventHandler('KR-29','광주')
+
 showCntNoticeByCity(seoul_url,'seoulCnt');
+svgClickEventHandler('KR-11','서울')
+
 showCntNoticeByCity(gyungido_url,'gyungiCnt');
+svgClickEventHandler('KR-41','경기도')
+
 showCntNoticeByCity(daejeon_url,'daejeonCnt');
+svgClickEventHandler('KR-43','대전')
+
 showCntNoticeByCity(daegu_url,'daeguCnt');
+svgClickEventHandler('KR-27','대구')
+
 showCntNoticeByCity(busan_url,'busanCnt');
+svgClickEventHandler('KR-26','부산')
+
 showCntNoticeByCity(jeju_url,'jejuCnt');
+svgClickEventHandler('KR-49','제주도')
+
                  
 //검색 API
 function searchAPI(){
@@ -219,6 +245,7 @@ function clickCityButton(cityName){
 }
 
 function announceNoNotice(){
+    clearTableRows();
     alert("공고중인 내용이 없습니다.");
 }
 
@@ -244,13 +271,6 @@ function getNoticeCntByCity(){
     document.querySelector('#gwangjuCnt').innerHTML = `광주(${gwangjuCnt})`;
     document.querySelector('#jejuCnt').innerHTML = `제주도(${jejuCnt})`;
 }
-
-// <tr>
-//     <td scope="row">3</td>
-//     <td scope="row">3</td>
-//     <td scope="row">3</td>
-//     <td scope="row">3</td>
-// </tr>
 
 //테이블 정보 추가
 function createTableRow(data){
